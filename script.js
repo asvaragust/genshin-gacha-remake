@@ -70,6 +70,7 @@ let b3_weapons = [
 
 // GACHA PRIVATE DATA 
 let rate_on = false
+let rate_on_b4 = false
 let pity = 0;
 let b4_guarantee = 0;
 
@@ -124,7 +125,7 @@ function bFiveToChar(){
         return `<div class="gold">${b5_rate_on_character[0]}</div>`
     } else {
         // AMBIL ANGKA ANTARA 0 / 1
-        random_chance = Math.floor(Math.random() * max_b5_rate_up_percentage)
+        random_chance = Math.floor(Math.random() * max_b5_rate_up_percentage) + 1
 
         // JIKA TRUE MAKA DAPAT RATE UP CHAR, 
         // JIKA FALSE MAKA DAPAT STANDAR
@@ -150,12 +151,16 @@ function bFourToCharOrWeapon(){
 
     // JIKA RATE UP MAKA AMBIL RAND CHAR DARI B4 RATE UP
     // JIKA TIDAK MAKA AMBIL RANDOM WEAPON ATAU CHAR
-    if(is_rate_up){
+    if(is_rate_up || rate_on_b4){
+        rate_on_b4 = false
+
         let random_index = Math.floor(Math.random() * b4_rate_up_character.length)
                 
         return `<div class="purple">${b4_rate_up_character[random_index]}</div>`
     }
     else{
+        rate_on_b4 = true
+
         let random_chance = _FiftyFifty()
 
         if(random_chance){
